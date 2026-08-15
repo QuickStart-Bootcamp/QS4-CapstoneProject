@@ -1,27 +1,19 @@
 import express from 'express'
 
 
+
 const router = express.Router ()
 
-router.get ("/kelvin", (req,res)=> {
-  console.log ("The request is recived")
-  res.send ("kelvin")
+
+router.get ("/", async (req,res)=> {
+  console.log ("The request is recived for Listing all students ")
+  const allStudents = await students.find()
+  console.log (allStudents)
+
+  //res.send ([{name:"farnaz"}, {name:"kien"}, {name:"miles"}])
+  res.send (allStudents)
 })
 
-router.get ("/kien", (req,res)=> {
-  console.log ("The request is recived")
-  res.send ("Kien")
-})
-
-router.get ("/Miles", (req,res)=> {
-  console.log ("The request is recived")
-  res.send ("Miles")
-})
-
-router.get ("/farnaz", (req,res)=> {
-  console.log ("finally")
-  res.send ("finally")
-})
 
 router.get ("/id", (req,res)=> {
   console.log ("The ID request is recived")
