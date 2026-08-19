@@ -4,10 +4,12 @@ import connectToDB from './dbConnetion.js'
 import studentsRouter from './routers/studentsRouter.js'
 
 const server = express()
-server.use (cors())
+server.use(cors())
+server.use(express.json())
+server.use(express.urlencoded({ extended: true }))
 
-connectToDB ()
-server.use ("/students", studentsRouter)
+connectToDB()
+server.use("/students", studentsRouter)
 
 server.get ("/", (req,res) => {
   res.send ("This is the server running")
