@@ -8,8 +8,6 @@ router.get ("/", async (req,res)=> {
   console.log ("The request is recived for Listing all students ")
   const allStudents = await students.find()
   console.log (allStudents)
-
-  //res.send ([{name:"farnaz"}, {name:"kien"}, {name:"miles"}])
   res.send (allStudents)
 })
 
@@ -35,12 +33,20 @@ router.delete ("/:studentID", async (req,res)=> {
 
 router.post ("/", async (req,res)=> {
   console.log ("The request for Adding student recived ...")
-  console.log (req)
-  console.log (req.method)
-  console.log (req.params)
-  console.log (req.query)
   console.log (req.body)
   const response = await students.create(req.body)
+})
+
+router.post ("/login/", async (req,res)=> {
+  console.log ("The request for login recived ...")
+  console.log (req.body)
+
+  const response = await students.find( {
+    username: req.body.username,
+    password: req.body.password
+  })
+  console.log (response)
+  res.send (response)
 })
 
 export default router;
