@@ -11,7 +11,7 @@ router.get ("/", async (req,res)=> {
   res.send (allStudents)
 })
 
-router.get ("/id", (req,res)=> {
+router.get ("/:id", (req,res)=> {
   console.log ("The ID request is recived")
   res.send ("The ID request for students recived")
 })
@@ -24,6 +24,7 @@ router.delete ("/:studentID", async (req,res)=> {
   console.log (req.params.studentID)
   try {
     let response = await students.deleteOne ({_id: req.params.studentID})
+    res.send ("The data is deleted")
     console.log (response)
   }
   catch (error) {
