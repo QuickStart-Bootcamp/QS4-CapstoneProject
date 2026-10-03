@@ -19,7 +19,8 @@ server.get ("/", (req,res) => {
 })
 
 
-console.log (process.env.CLAUDE_API_KEY)
-server.listen (4000, () => {
-  console.log ("The server is running at port 4000")
-})
+const PORT = process.env.PORT || 4000;
+
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
+});

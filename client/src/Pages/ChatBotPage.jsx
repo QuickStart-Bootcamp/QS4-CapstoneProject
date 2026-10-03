@@ -12,9 +12,13 @@ function ChatBotPage() {
 
   async function handleSubmit(event) {
     event.preventDefault()
-    console.log (question)
-    let response = await axios.post ("http://localhost:4000/ai/", {"question":question})
-    console.log (response)
+
+    //let response = await axios.post ("http://localhost:4000/ai/", {"question":question})
+
+    const API_URL = process.env.REACT_APP_API_URL;
+    let response = await axios.post(`${API_URL}/ai/`, {"question":question});
+    
+    console.log (response.data)
   }
 
   async function handleChange (event) {

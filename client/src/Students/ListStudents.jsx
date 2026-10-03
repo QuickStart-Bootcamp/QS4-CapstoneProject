@@ -5,10 +5,12 @@ import Button from 'react-bootstrap/Button';
 
 function ListStudents() {
   const [students, setStudents] = useState([])
-  
+  const API_URL = process.env.REACT_APP_API_URL;
+    
   async function fetchStudents () {
     console.log ("Ready for connecting to server")
-    let response = await axios.get ("http://localhost:4000/students/")
+    // let response = await axios.get ("http://localhost:4000/students/")
+    let response = await axios.get(`${API_URL}/students/`);
     console.log (response) 
     console.log (response.data)
     setStudents (response.data)
@@ -21,7 +23,8 @@ function ListStudents() {
   
   async function handleDelete (studentID) {
     console.log (studentID)
-    const response = await axios.delete (`http://localhost:4000/students/${studentID}`)
+    //const response = await axios.delete (`http://localhost:4000/students/${studentID}`)
+     let response = await axios.delete(`${API_URL}/students/${studentID}`);
     console.log (response)
   }
 

@@ -20,8 +20,11 @@ function AddStudent() {
 
   async function handleSubmit (event) {
     event.preventDefault()
-    console.log (formData)
-    let response = await axios.post ("http://localhost:4000/students/", formData)
+
+    // let response = await axios.post ("http://localhost:4000/students/", formData)
+    
+    const API_URL = process.env.REACT_APP_API_URL;
+    let response = await axios.post(`${API_URL}/students/`, formData);
     console.log (response)
   }
 
