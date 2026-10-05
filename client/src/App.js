@@ -32,7 +32,6 @@ function App() {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/service">Service</Nav.Link>
             <Nav.Link as={Link} to="/students">Students</Nav.Link>
-            <Nav.Link as={Link} to="/about">About</Nav.Link>
             <Nav.Link as={Link} to="/ai">ChatBot</Nav.Link>
             <Nav.Link as={Link} to="/form">NewForm</Nav.Link>
 
