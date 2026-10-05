@@ -10,7 +10,7 @@ import StudentsPage from './Pages/StudentsPage';
 import ChatBotPage from './Pages/ChatBotPage';
 import FormPage from './Pages/FormPage';
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 
 function App() {
   const [isLoggedin, setIsLoggedin] = useState (false)
@@ -29,12 +29,12 @@ function App() {
       <Navbar bg="light" data-bs-theme="light">
         <Container >
           <Nav>
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/service">Service</Nav.Link>
-            <Nav.Link href="/students">Students</Nav.Link>
-            <Nav.Link href="/about">About</Nav.Link>
-            <Nav.Link href="/ai">ChatBot</Nav.Link>
-            <Nav.Link href="/form">NewForm</Nav.Link>
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/service">Service</Nav.Link>
+            <Nav.Link as={Link} to="/students">Students</Nav.Link>
+            <Nav.Link as={Link} to="/about">About</Nav.Link>
+            <Nav.Link as={Link} to="/ai">ChatBot</Nav.Link>
+            <Nav.Link as={Link} to="/form">NewForm</Nav.Link>
 
           </Nav>
         </Container>
