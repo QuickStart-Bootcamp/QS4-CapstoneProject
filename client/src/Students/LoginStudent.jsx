@@ -13,6 +13,7 @@ export default function LoginStudent({isLoggedin,setIsLoggedin}) {
     username: "",
     password: ""
   })
+  const API_URL = process.env.REACT_APP_API_URL;
 
 
   function handleChange (event) {
@@ -21,8 +22,9 @@ export default function LoginStudent({isLoggedin,setIsLoggedin}) {
 
   async function handleSubmit (event) {
     event.preventDefault()
-    console.log (formData)
-    let response = await axios.post ("http://localhost:4000/students/login/", formData)
+    //let response = await axios.post ("http://localhost:4000/students/login/", formData)
+    let response = await axios.post(`${API_URL}/students/login/`, formData);
+    console.log (response)
     console.log (response.data)
     setIsLoggedin (true)
     
