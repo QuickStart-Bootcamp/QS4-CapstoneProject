@@ -5,6 +5,7 @@ import connectToDB from './dbConnetion.js'
 import studentsRouter from './routers/studentsRouter.js'
 import aiRouter from './routers/aiRouter.js'
 import dns from 'dns/promises'
+import net from 'net'
 
 
 const server = express()
@@ -12,7 +13,8 @@ server.use(cors())
 server.use(express.json())
 server.use(express.urlencoded({ extended: true }))
 
-async function testDNS() {
+
+async function testMongoPort() {
   const hosts = [
     'ac-d7zzkoh-shard-00-00.vdch7uj.mongodb.net',
     'ac-d7zzkoh-shard-00-01.vdch7uj.mongodb.net',
@@ -20,17 +22,28 @@ async function testDNS() {
   ]
 
   for (const host of hosts) {
-    try {
-      const result = await dns.resolve4(host)
-      console.log("MongoDB DNS:", host, result)
-    } catch (error) {
-      console.log("MongoDB DNS ERROR:", host, error.message)
-    }
+    const socket = net.createConnection(27017, host)
+
+    socket.setTimeout(5000)
+
+    socket.on('connect', () => {
+      console.log("MongoDB TCP CONNECTED:", host)
+      socket.destroy()
+    })
+
+    socket.on('timeout', () => {
+      console.log("MongoDB TCP TIMEOUT:", host)
+      socket.destroy()
+    })
+
+    socket.on('error', (error) => {
+      console.log("MongoDB TCP ERROR:", host, error.code)
+    })
   }
 }
 
-testDNS()
 
+testMongoPort()
 
 
 connectToDB()
