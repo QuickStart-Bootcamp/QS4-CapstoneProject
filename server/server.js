@@ -7,6 +7,8 @@ import aiRouter from './routers/aiRouter.js'
 import net from 'net'
 import tls from 'tls'
 
+console.log("Node:", process.version)
+console.log("OpenSSL:", process.versions.openssl)
 
 const server = express()
 server.use(cors())
