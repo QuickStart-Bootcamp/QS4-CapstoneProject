@@ -49,6 +49,8 @@ async function testMongoTLS() {
     host: host,
     port: 27017,
     servername: host,
+    minVersion: 'TLSv1.2',
+    maxVersion: 'TLSv1.2',
     rejectUnauthorized: true
   })
 
