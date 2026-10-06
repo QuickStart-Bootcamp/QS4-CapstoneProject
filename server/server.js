@@ -4,8 +4,8 @@ import cors from 'cors'
 import connectToDB from './dbConnetion.js'
 import studentsRouter from './routers/studentsRouter.js'
 import aiRouter from './routers/aiRouter.js'
-import dns from 'dns/promises'
 import net from 'net'
+import tls from 'tls'
 
 
 const server = express()
@@ -42,11 +42,38 @@ async function testMongoPort() {
   }
 }
 
+async function testMongoTLS() {
+  const host = 'ac-d7zzkoh-shard-00-00.vdch7uj.mongodb.net'
 
+  const socket = tls.connect({
+    host: host,
+    port: 27017,
+    servername: host,
+    rejectUnauthorized: true
+  })
+
+  socket.on('secureConnect', () => {
+    console.log("MongoDB TLS CONNECTED")
+    console.log("TLS version:", socket.getProtocol())
+    console.log("Cipher:", socket.getCipher())
+    socket.destroy()
+  })
+
+  socket.on('error', (error) => {
+    console.log("MongoDB TLS ERROR:", error.code, error.message)
+  })
+
+  socket.setTimeout(10000, () => {
+    console.log("MongoDB TLS TIMEOUT")
+    socket.destroy()
+  })
+}
+
+testMongoTLS()
 testMongoPort()
-
-
 connectToDB()
+
+
 server.use("/students", studentsRouter)
 server.use("/ai", aiRouter)
 
