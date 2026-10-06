@@ -13,11 +13,19 @@ server.use(express.json())
 server.use(express.urlencoded({ extended: true }))
 
 async function testDNS() {
-  try {
-    const result = await dns.lookup('ac-d7zzkoh-shard-00-00.vdch7uj.mongodb.net')
-    console.log("MongoDB DNS:", result)
-  } catch (error) {
-    console.log("MongoDB DNS ERROR:", error)
+  const hosts = [
+    'ac-d7zzkoh-shard-00-00.vdch7uj.mongodb.net',
+    'ac-d7zzkoh-shard-00-01.vdch7uj.mongodb.net',
+    'ac-d7zzkoh-shard-00-02.vdch7uj.mongodb.net'
+  ]
+
+  for (const host of hosts) {
+    try {
+      const result = await dns.resolve4(host)
+      console.log("MongoDB DNS:", host, result)
+    } catch (error) {
+      console.log("MongoDB DNS ERROR:", host, error.message)
+    }
   }
 }
 
